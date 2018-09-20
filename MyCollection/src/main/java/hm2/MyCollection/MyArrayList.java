@@ -2,7 +2,7 @@ package hm2.MyCollection;
 
 import java.util.*;
 
-public class MyArrayList<T> implements List<T> {
+public class MyArrayList<T> implements List<T>{
     private int size;
     transient Object elementdata[];
     private static final Object[] EMPTY_ELEMENT_DATA={};
@@ -54,7 +54,11 @@ public class MyArrayList<T> implements List<T> {
         procuringCapacity(size+numC);
         System.arraycopy(a,0,elementdata,size,size+numC);
         size+=numC;
-        return false;
+        return numC!=0;
+    }
+    public static <T> void copy(List<T> list,Comparator<? super T> c){
+
+
     }
     private void procuringCapacity(int capacity){
         if (capacity>elementdata.length){growUpCapactiy(calculateCapacity(elementdata,capacity));}
@@ -64,7 +68,7 @@ public class MyArrayList<T> implements List<T> {
     }
     private void growUpCapactiy(int capacity){
         int oldElementDataLength=elementdata.length;
-        int newElementDataLength=elementdata.length+elementdata.length>>1;
+        int newElementDataLength=oldElementDataLength+oldElementDataLength>>1;
         if (newElementDataLength-capacity<0) {
             newElementDataLength=capacity;
         }
