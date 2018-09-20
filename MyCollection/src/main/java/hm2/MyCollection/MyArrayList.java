@@ -4,7 +4,13 @@ import java.util.*;
 
 public class MyArrayList<T> implements List<T> {
     private int size;
-    private T elementdata[];
+    transient Object elementdata[];
+    private static final Object[] EMPTY_ELEMENT_DATA={};
+    private  static final int defaultCapacity=10;
+
+    public MyArrayList(){
+        elementdata=EMPTY_ELEMENT_DATA;
+    }
 
     public int size() {
         return size;
@@ -43,12 +49,27 @@ public class MyArrayList<T> implements List<T> {
     }
 
     public boolean addAll(Collection<? extends T> c) {
-        
         Object[] a=c.toArray();
         int numC=c.size();
-        System.arraycopy(c,numC,a,size,size+numC);
+        procuringCapacity(size+numC);
+        System.arraycopy(a,0,elementdata,size,size+numC);
         size+=numC;
         return false;
+    }
+    private void procuringCapacity(int capacity){
+        if (capacity>elementdata.length){growUpCapactiy(calculateCapacity(elementdata,capacity));}
+    }
+    private static int calculateCapacity(Object[] elementdata,int capacity){
+        return elementdata==EMPTY_ELEMENT_DATA?defaultCapacity:Math.max(defaultCapacity,capacity);
+    }
+    private void growUpCapactiy(int capacity){
+        int oldElementDataLength=elementdata.length;
+        int newElementDataLength=elementdata.length+elementdata.length>>1;
+        if (newElementDataLength-capacity<0) {
+            newElementDataLength=capacity;
+        }
+            elementdata=Arrays.copyOf(elementdata,newElementDataLength);
+
     }
 
     public boolean addAll(int index, Collection<? extends T> c) {
