@@ -105,7 +105,8 @@ hs_err_pid*
 ### Java-Web ###
 ## ignoring target file
 target/
-/myVkApp/myVkApp.iml
+/MyCollection/MyCollection.iml
+/MyCollection/.idea
 
 ### Maven ###
 pom.xml.tag
