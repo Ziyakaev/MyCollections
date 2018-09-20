@@ -3,12 +3,15 @@ package hm2.MyCollection;
 import java.util.*;
 
 public class MyArrayList<T> implements List<T> {
+    private int size;
+    private T elementdata[];
+
     public int size() {
-        return 0;
+        return size;
     }
 
     public boolean isEmpty() {
-        return false;
+        return size!=0;
     }
 
     public boolean contains(Object o) {
@@ -40,6 +43,11 @@ public class MyArrayList<T> implements List<T> {
     }
 
     public boolean addAll(Collection<? extends T> c) {
+        
+        Object[] a=c.toArray();
+        int numC=c.size();
+        System.arraycopy(c,numC,a,size,size+numC);
+        size+=numC;
         return false;
     }
 
