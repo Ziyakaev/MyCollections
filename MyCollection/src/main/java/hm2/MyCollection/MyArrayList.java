@@ -1,5 +1,6 @@
 package hm2.MyCollection;
 
+import javax.swing.text.html.HTMLDocument;
 import java.util.*;
 
 public class MyArrayList<T> implements List<T>{
@@ -21,31 +22,38 @@ public class MyArrayList<T> implements List<T>{
     }
 
     public boolean contains(Object o) {
-        return false;
+        throw new RuntimeException("not realised");
+     //   return false;
     }
 
     public Iterator<T> iterator() {
-        return null;
+        throw new RuntimeException("not realised");
+      //  return null;
     }
 
     public Object[] toArray() {
-        return new Object[0];
+
+        return Arrays.copyOf(elementdata,size);
     }
 
     public <T1> T1[] toArray(T1[] a) {
-        return null;
+        throw new RuntimeException("not realised");
+      //  return null;
     }
 
     public boolean add(T t) {
-        return false;
+        throw new RuntimeException("not realised");
+      //  return false;
     }
 
     public boolean remove(Object o) {
-        return false;
+        throw new RuntimeException("not realised");
+      //  return false;
     }
 
     public boolean containsAll(Collection<?> c) {
-        return false;
+        throw new RuntimeException("not realised");
+       // return false;
     }
 
     public boolean addAll(Collection<? extends T> c) {
@@ -58,7 +66,10 @@ public class MyArrayList<T> implements List<T>{
     }
     public static <T> void copy(List<T> list,Comparator<? super T> c){
 
+    }
 
+    public void sort(List<T> list,Comparator<? super T> c){
+    list.sort(c);
     }
     private void procuringCapacity(int capacity){
         if (capacity>elementdata.length){growUpCapactiy(calculateCapacity(elementdata,capacity));}
@@ -77,54 +88,121 @@ public class MyArrayList<T> implements List<T>{
     }
 
     public boolean addAll(int index, Collection<? extends T> c) {
-        return false;
+        throw new RuntimeException("not realised");
+     //   return false;
     }
 
     public boolean removeAll(Collection<?> c) {
-        return false;
+        throw new RuntimeException("not realised");
+      //  return false;
     }
 
     public boolean retainAll(Collection<?> c) {
-        return false;
+        throw new RuntimeException("not realised");
+      //  return false;
     }
 
     public void clear() {
-
+        throw new RuntimeException("not realised");
     }
 
     public T get(int index) {
-        return null;
+        return(T) elementdata[index];
     }
 
     public T set(int index, T element) {
-        return null;
+        throw new RuntimeException("not realised");
+       // return null;
     }
 
     public void add(int index, T element) {
-
+        throw new RuntimeException("not realised");
     }
 
     public T remove(int index) {
-        return null;
+        throw new RuntimeException("not realised");
+     //   return null;
     }
 
     public int indexOf(Object o) {
-        return 0;
+        throw new RuntimeException("not realised");
+      //  return 0;
     }
 
     public int lastIndexOf(Object o) {
-        return 0;
+        throw new RuntimeException("not realised");
+       // return 0;
     }
 
     public ListIterator<T> listIterator() {
-        return null;
+       return new ListItr(0);
+    }
+    private class ListItr extends Itr implements ListIterator<T>{
+
+      public ListItr(int index){
+          super();
+          cursor=index;
+      }
+
+        @Override
+        public boolean hasPrevious() {
+            return cursor!=0;
+        }
+
+        @Override
+        public T previous() {
+          int i=cursor-1;
+          Object[] elementData=MyArrayList.this.elementdata;
+            return (T)elementData[i];
+        }
+
+        @Override
+        public int nextIndex() {
+            return cursor;
+        }
+
+        @Override
+        public int previousIndex() {
+            return cursor-1;
+        }
+
+        @Override
+        public void remove() {
+
+        }
+
+        @Override
+        public void set(T t) {
+
+        }
+
+        @Override
+        public void add(T t) {
+
+        }
     }
 
     public ListIterator<T> listIterator(int index) {
-        return null;
+        throw new RuntimeException("not realised");
+      //  return null;
     }
 
     public List<T> subList(int fromIndex, int toIndex) {
-        return null;
+        throw new RuntimeException("not realised");
+       // return null;
+    }
+    private class Itr implements Iterator<T> {
+        int cursor;
+        @Override
+        public boolean hasNext() {
+            return cursor!=size;
+        }
+
+        @Override
+        public T next() {
+            Object [] element=MyArrayList.this.elementdata;
+
+            return(T) element[cursor];
+        }
     }
 }
